@@ -1,6 +1,7 @@
 <template>
     <div>
         <br>
+        <flash-message/>
         <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white">
             <logo :avatar="user.avatar"/>
             <div class="px-6 py-4">
@@ -27,15 +28,18 @@
             <br><br>
             &copy;2020 All rights reserved.
         </p>
+        <upload-modal/>
     </div>
 </template>
 
 <script>
     import Logo from "../components/Logo";
+    import UploadModal from "../components/UploadModal";
+    import FlashMessage from "../components/FlashMessage";
 
     export default {
         name: "Home",
-        components: {Logo},
+        components: {FlashMessage, UploadModal, Logo},
         data() {
             return {
                 button: 'Logout',

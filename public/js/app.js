@@ -15022,23 +15022,19 @@ module.exports = g;
 var map = {
 	"./Auth/Login": [
 		"./resources/js/Pages/Auth/Login.vue",
-		0,
-		4
+		0
 	],
 	"./Auth/Login.vue": [
 		"./resources/js/Pages/Auth/Login.vue",
-		0,
-		4
+		0
 	],
 	"./Auth/Register": [
 		"./resources/js/Pages/Auth/Register.vue",
-		0,
-		5
+		1
 	],
 	"./Auth/Register.vue": [
 		"./resources/js/Pages/Auth/Register.vue",
-		0,
-		5
+		1
 	],
 	"./Home": [
 		"./resources/js/Pages/Home.vue",
