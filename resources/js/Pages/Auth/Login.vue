@@ -93,6 +93,14 @@
                 this.$inertia.post('/login', this.form)
             },
         },
+        watch: {
+
+            '$page.errors': {
+                handler() {
+                    this.button = 'Sign In'
+                },
+            },
+        },
     }
 </script>
 

@@ -72,6 +72,9 @@ __webpack_require__.r(__webpack_exports__);
     user: function user() {
       return this.$page.auth.user;
     }
+  },
+  mounted: function mounted() {
+    console.log(route('avatar'));
   }
 });
 
@@ -174,14 +177,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 //
 //
 //
@@ -271,8 +266,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       file: null,
-      button: 'Update',
-      errors: []
+      button: 'Update'
     };
   },
   computed: {
@@ -321,94 +315,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     upload: function upload() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var bodyFormData, response, cat;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (_this.file) {
-                  _context.next = 2;
-                  break;
-                }
+      if (!this.file) {
+        return;
+      }
 
-                return _context.abrupt("return");
+      this.button = 'Uploading ...';
+      var bodyFormData = new FormData();
+      bodyFormData.append('photo', this.file);
+      this.$inertia.post(route('avatar'), bodyFormData).then(function () {
+        _this.button = 'Upload';
 
-              case 2:
-                _this.errors = [];
-                _this.button = 'Uploading ...'; // Creating form data object
+        _this.clear();
 
-                bodyFormData = new FormData();
-                bodyFormData.set('operations', JSON.stringify({
-                  // Mutation string
-                  query: "mutation($file: Upload!) { UpdateUserProfilePhoto(profilePicture: $file){id, name, avatar, email, api_token} }",
-                  variables: {
-                    attachment: _this.file
-                  }
-                }));
-                bodyFormData.set('operationName', null);
-                bodyFormData.set('map', JSON.stringify({
-                  file: ['variables.file']
-                }));
-                bodyFormData.append('file', _this.file); // Post the request to GraphQL controller
-
-                _context.next = 11;
-                return _this.$axios.post('/', bodyFormData, {
-                  headers: {
-                    'Content-Type': 'multipart/form-data'
-                  }
-                });
-
-              case 11:
-                response = _context.sent;
-
-                if (!(response.data.errors || response.data.data.UpdateUserProfilePhoto === null)) {
-                  _context.next = 22;
-                  break;
-                }
-
-                console.log(response.data);
-                cat = response.data.errors[0].extensions.category;
-
-                if (!(cat === 'validation')) {
-                  _context.next = 19;
-                  break;
-                }
-
-                _this.errors = response.data.errors[0].extensions.validation;
-                _this.button = 'Upload';
-                return _context.abrupt("return");
-
-              case 19:
-                _this.$toast.error('Error occured, try again !');
-
-                _this.button = 'Upload';
-                return _context.abrupt("return");
-
-              case 22:
-                if (response.data.data) {
-                  console.log('response');
-
-                  _this.$store.dispatch('user/loginUser', response.data.data.UpdateUserProfilePhoto).then(function (_e) {
-                    _this.file = null;
-
-                    _this.clear();
-
-                    _this.toggleModal();
-
-                    _this.$toast.success('Avatar successfully upated');
-                  });
-                }
-
-                _this.button = 'Upload';
-
-              case 24:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
+        _this.toggleModal();
+      });
     },
     clear: function clear() {
       var input = this.$refs.uploadFile;
@@ -907,7 +827,7 @@ var render = function() {
                 ref: "uploadFile",
                 class: [
                   "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline ",
-                  _vm.errors.profilePicture ? "border-red-500" : ""
+                  _vm.$page.errors.photo ? "border-red-500" : ""
                 ],
                 attrs: { id: "uploadFile", type: "file", accept: "image/*" },
                 on: { change: _vm.handleUploadChange }
@@ -926,11 +846,11 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm.errors.profilePicture
+              _vm.$page.errors.photo
                 ? _c("p", { staticClass: "text-red-500 text-xs italic" }, [
                     _vm._v(
                       "\n                    " +
-                        _vm._s(_vm.errors.profilePicture[0]) +
+                        _vm._s(_vm.$page.errors.photo[0]) +
                         "\n                "
                     )
                   ])

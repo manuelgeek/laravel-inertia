@@ -105,6 +105,13 @@ __webpack_require__.r(__webpack_exports__);
       this.button = 'Signing In ...';
       this.$inertia.post('/login', this.form);
     }
+  },
+  watch: {
+    '$page.errors': {
+      handler: function handler() {
+        this.button = 'Sign In';
+      }
+    }
   }
 });
 

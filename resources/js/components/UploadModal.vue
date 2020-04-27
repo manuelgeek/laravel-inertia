@@ -54,7 +54,7 @@
                         type="file"
                         :class="[
               'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline ',
-              errors.profilePicture ? 'border-red-500' : ''
+              $page.errors.photo ? 'border-red-500' : ''
             ]"
                         accept="image/*"
                         @change="handleUploadChange"
@@ -62,8 +62,8 @@
                     <label class="custom-file-label" for="uploadFile">
                         Drop Files Here to upload
                     </label>
-                    <p v-if="errors.profilePicture" class="text-red-500 text-xs italic">
-                        {{ errors.profilePicture[0] }}
+                    <p v-if="$page.errors.photo" class="text-red-500 text-xs italic">
+                        {{ $page.errors.photo[0] }}
                     </p>
                 </div>
 
@@ -83,13 +83,13 @@
 </template>
 
 <script>
+
     export default {
         name: 'UploadModal',
         data() {
             return {
                 file: null,
                 button: 'Update',
-                errors: []
             }
         },
         computed: {
@@ -101,7 +101,7 @@
             const vm = this
             const openmodal = document.querySelectorAll('.modal-open')
             for (let i = 0; i < openmodal.length; i++) {
-                openmodal[i].addEventListener('click', function(event) {
+                openmodal[i].addEventListener('click', function (event) {
                     event.preventDefault()
                     vm.toggleModal()
                 })
@@ -115,7 +115,7 @@
                 closemodal[i].addEventListener('click', this.toggleModal)
             }
 
-            document.onkeydown = function(evt) {
+            document.onkeydown = function (evt) {
                 evt = evt || window.event
                 let isEscape = false
                 if ('key' in evt) {
@@ -132,60 +132,20 @@
             handleUploadChange() {
                 this.file = this.$refs.uploadFile.files[0]
             },
-            async upload() {
+            upload() {
                 if (!this.file) {
                     return
                 }
-                this.errors = []
                 this.button = 'Uploading ...'
-                // Creating form data object
                 const bodyFormData = new FormData()
-                bodyFormData.set(
-                    'operations',
-                    JSON.stringify({
-                        // Mutation string
-                        query: `mutation($file: Upload!) { UpdateUserProfilePhoto(profilePicture: $file){id, name, avatar, email, api_token} }`,
-                        variables: { attachment: this.file }
-                    })
-                )
-                bodyFormData.set('operationName', null)
-                bodyFormData.set('map', JSON.stringify({ file: ['variables.file'] }))
-                bodyFormData.append('file', this.file)
+                bodyFormData.append('photo', this.file)
 
-                // Post the request to GraphQL controller
-                const response = await this.$axios.post('/', bodyFormData, {
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                })
-
-                if (
-                    response.data.errors ||
-                    response.data.data.UpdateUserProfilePhoto === null
-                ) {
-                    console.log(response.data)
-                    const cat = response.data.errors[0].extensions.category
-                    if (cat === 'validation') {
-                        this.errors = response.data.errors[0].extensions.validation
+                this.$inertia.post(route('avatar'), bodyFormData)
+                    .then(() => {
                         this.button = 'Upload'
-                        return
-                    }
-                    this.$toast.error('Error occured, try again !')
-                    this.button = 'Upload'
-                    return
-                }
-                if (response.data.data) {
-                    console.log('response')
-                    this.$store
-                        .dispatch('user/loginUser', response.data.data.UpdateUserProfilePhoto)
-                        .then((_e) => {
-                            this.file = null
-                            this.clear()
-                            this.toggleModal()
-                            this.$toast.success('Avatar successfully upated')
-                        })
-                }
-                this.button = 'Upload'
+                        this.clear()
+                        this.toggleModal()
+                    })
             },
             clear() {
                 const input = this.$refs.uploadFile

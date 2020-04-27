@@ -57,6 +57,9 @@
                 return this.$page.auth.user
             }
         },
+        mounted() {
+            console.log(route('avatar'))
+        }
     }
 </script>
 
