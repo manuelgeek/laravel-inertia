@@ -23,6 +23,10 @@
           </span>
             </div>
         </div>
+        <p class="text-center text-gray-500 text-xs">
+            <br><br>
+            &copy;2020 All rights reserved.
+        </p>
     </div>
 </template>
 
@@ -38,9 +42,14 @@
                 button_2: 'Change Avatar'
             }
         },
+        methods: {
+            logout() {
+                this.button = 'Loging Out ...'
+                this.$inertia.post('/logout', this.form)
+            },
+        },
         computed: {
             user() {
-                // console.log(this.$store.state)
                 return this.$page.auth.user
             }
         },

@@ -38,6 +38,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Home",
@@ -50,9 +54,14 @@ __webpack_require__.r(__webpack_exports__);
       button_2: 'Change Avatar'
     };
   },
+  methods: {
+    logout: function logout() {
+      this.button = 'Loging Out ...';
+      this.$inertia.post('/logout', this.form);
+    }
+  },
   computed: {
     user: function user() {
-      // console.log(this.$store.state)
       return this.$page.auth.user;
     }
   }
@@ -212,10 +221,23 @@ var render = function() {
         ])
       ],
       1
-    )
+    ),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "text-center text-gray-500 text-xs" }, [
+      _c("br"),
+      _c("br"),
+      _vm._v("\n        ©2020 All rights reserved.\n    ")
+    ])
+  }
+]
 render._withStripped = true
 
 
