@@ -15214,6 +15214,14 @@ var map = {
 	"./Auth/Login.vue": [
 		"./resources/js/Pages/Auth/Login.vue",
 		0
+	],
+	"./Auth/Register": [
+		"./resources/js/Pages/Auth/Register.vue",
+		1
+	],
+	"./Auth/Register.vue": [
+		"./resources/js/Pages/Auth/Register.vue",
+		1
 	]
 };
 function webpackAsyncContext(req) {

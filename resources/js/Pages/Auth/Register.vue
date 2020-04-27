@@ -1,9 +1,31 @@
 <template>
     <div class="w-full h-full max-w-xs  self-center">
         <div class="row-start-2 row-span-2 text-blue-600 text-center">
-            <h3 class="text-5xl">Login Page</h3>
+            <h3 class="text-5xl">Register Page</h3>
         </div>
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="login">
+        <flash-message/>
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="register">
+            <div class="mb-4">
+                <label
+                    class="block text-gray-700 text-sm font-bold mb-2"
+                    for="username"
+                >
+                    Name
+                </label>
+                <input
+                    id="username"
+                    v-model="form.name"
+                    :class="[
+            'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline',
+            $page.errors.name ? 'border-red-500' : ''
+          ]"
+                    type="text"
+                    placeholder="Name"
+                />
+                <p v-if="$page.errors.name" class="text-red-500 text-xs italic">
+                    {{ $page.errors.name[0] }}
+                </p>
+            </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
                     Email
@@ -43,13 +65,20 @@
                     {{ $page.errors.password[0] }}
                 </p>
             </div>
-            <div>
-                <a
-                    class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                    href="#"
+            <div class="mb-6">
+                <label
+                    class="block text-gray-700 text-sm font-bold mb-2"
+                    for="password_c"
                 >
-                    Forgot Password?
-                </a>
+                    Password Confirm
+                </label>
+                <input
+                    id="password_c"
+                    v-model="form.password_confirmation"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                    type="password"
+                    placeholder="Confirm Password"
+                />
             </div>
             <div class="flex items-center justify-between">
                 <button
@@ -60,9 +89,9 @@
                 </button>
                 <inertia-link
                     class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                    href="/register"
+                    href="/login"
                 >
-                    Sign Up ?
+                    Sign In?
                 </inertia-link>
             </div>
         </form>
@@ -73,21 +102,33 @@
 </template>
 
 <script>
+    import FlashMessage from "../../components/FlashMessage";
     export default {
-        name: "Login",
+        name: "Register",
+        components: {FlashMessage},
         data() {
             return {
                 form: {
+                    name: '',
                     email: '',
-                    password: ''
+                    password: '',
+                    password_confirmation: ''
                 },
-                button: 'Sign In'
+                button: 'Sign Up',
             }
         },
         methods: {
-            login() {
-                this.button = 'Signing In ...'
-                this.$inertia.post('/login', this.form)
+            register() {
+                this.button = 'Signing Up ...'
+                this.$inertia.post('/register', this.form)
+            },
+        },
+        watch: {
+
+            '$page.errors': {
+                handler() {
+                    this.button = 'Sign Up'
+                },
             },
         },
     }

@@ -8,10 +8,17 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <link href="{{ mix('/css/app.css') }}" rel="stylesheet" >
+    <link href="{{ asset('/css/nprogress.css') }}" rel="stylesheet" >
     <script src="{{ mix('/js/app.js') }}" defer></script>
 </head>
 <body>
-@inertia
+<div class="min-h-full bg-gray-100">
+    <div class="container mx-auto px-4 ">
+        <div class="flex justify-center content-center">
+            @inertia
+        </div>
+    </div>
+</div>
 </body>
 </html>
 

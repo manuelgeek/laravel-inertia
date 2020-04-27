@@ -83,7 +83,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Login",
   data: function data() {
@@ -242,8 +241,7 @@ var render = function() {
               {
                 staticClass:
                   "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline",
-                attrs: { type: "button" },
-                on: { click: _vm.login }
+                attrs: { type: "submit" }
               },
               [
                 _vm._v(
