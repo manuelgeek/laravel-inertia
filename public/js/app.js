@@ -15222,6 +15222,16 @@ var map = {
 	"./Auth/Register.vue": [
 		"./resources/js/Pages/Auth/Register.vue",
 		1
+	],
+	"./Home": [
+		"./resources/js/Pages/Home.vue",
+		2,
+		3
+	],
+	"./Home.vue": [
+		"./resources/js/Pages/Home.vue",
+		2,
+		3
 	]
 };
 function webpackAsyncContext(req) {
@@ -15234,7 +15244,7 @@ function webpackAsyncContext(req) {
 	}
 
 	var ids = map[req], id = ids[0];
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(id);
 	});
 }

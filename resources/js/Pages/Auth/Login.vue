@@ -3,6 +3,7 @@
         <div class="row-start-2 row-span-2 text-blue-600 text-center">
             <h3 class="text-5xl">Login Page</h3>
         </div>
+        <flash-message/>
         <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit.prevent="login">
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
@@ -73,8 +74,10 @@
 </template>
 
 <script>
+    import FlashMessage from "../../components/FlashMessage";
     export default {
         name: "Login",
+        components: {FlashMessage},
         data() {
             return {
                 form: {
