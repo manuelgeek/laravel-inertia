@@ -5,6 +5,14 @@
 
  This is a sample Laravel project to illustrate Creating SPA with Inertia JS
  
+ ## Table of contents
+ - [Set Up](#set-up)
+ - [Features](#features)
+ - [Screenshot](#screenshot)
+ - [Resources](#resources)
+ - [About Me](#about-me)
+ - [Licence](#licence)
+ 
  ## Set up 
  
  Fork and Clone the project  then;
@@ -25,6 +33,7 @@ php artisan serve
 ```
 
 ## Features 
+
 * Register
 * Login
 * Update Avatar
