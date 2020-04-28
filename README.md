@@ -1,4 +1,4 @@
-<p align="center"><img src="https://magak.me/assets/images/Geek-logo.png" width="300"></p>
+<p align="center"><img src="https://magak.me/assets/images/Geek-logo.png" width="150"></p>
 
 
 ## About Laravel Inertia
@@ -31,6 +31,9 @@ php artisan serve
 * CRUD
 * Pagination
 
+## Screenshot
+![img reg](register-inertia.png){:height="700px" width="400px"}
+![img home](home-inertia.png?s=200)
 ## Resources
 
  [Inertia](https://inertiajs.com/)
