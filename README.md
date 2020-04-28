@@ -32,12 +32,11 @@ php artisan serve
 * Pagination
 
 ## Screenshot
-![img reg](register-inertia.png)
+
+<p align="center"><img src="register-inertia.png" width="600" alt="img"></p>
 
 
-![img home](home-inertia.png?s=200)
-
-<p align="center"><img src="home-inertia.png" width="300"></p>
+<p align="center"><img src="home-inertia.png" width="600" alt="img"></p>
 ## Resources
 
  [Inertia](https://inertiajs.com/)
