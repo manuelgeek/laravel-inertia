@@ -7,6 +7,7 @@
  
  ## Table of contents
  - [Set Up](#set-up)
+ - [Tech Stack](#tech-stack)
  - [Features](#features)
  - [Screenshot](#screenshot)
  - [Resources](#resources)
@@ -31,6 +32,13 @@ npm run dev
 php artisan serve
 
 ```
+## Tech Stack
+
+- Laravel
+- Vue Js
+- Tailwind CSS
+- Inertia JS
+
 
 ## Features 
 
