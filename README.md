@@ -37,6 +37,8 @@ php artisan serve
 
 
 <p align="center"><img src="home-inertia.png" width="800" alt="img"></p>
+
+
 ## Resources
 
  [Inertia](https://inertiajs.com/)
@@ -44,6 +46,7 @@ php artisan serve
 
 ## About Me
 [Magak](https://magak.me)
+
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
