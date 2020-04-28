@@ -50,11 +50,14 @@ php artisan serve
 
 ## Resources
 
- [Inertia](https://inertiajs.com/)
+ - [Inertia](https://inertiajs.com/)
+ - [Laravel Inertia](https://github.com/inertiajs/inertia-laravel)
+ - [Vue Js Inertia](https://github.com/inertiajs/inertia-vue)
 
 
 ## About Me
-[Magak](https://magak.me)
+
+[Magak Emmanuel](https://magak.me)
 
 ## License
 
