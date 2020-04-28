@@ -33,10 +33,10 @@ php artisan serve
 
 ## Screenshot
 
-<p align="center"><img src="register-inertia.png" width="600" alt="img"></p>
+<p align="center"><img src="register-inertia.png" width="800" alt="img"></p>
 
 
-<p align="center"><img src="home-inertia.png" width="600" alt="img"></p>
+<p align="center"><img src="home-inertia.png" width="800" alt="img"></p>
 ## Resources
 
  [Inertia](https://inertiajs.com/)
